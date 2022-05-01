@@ -1,5 +1,8 @@
 class SessionsController < ApplicationController
 
+before_action :login_require, only: [:destroy]
+before_action :already_logged_in, only: [:new, :create]
+
 	def new
 	end
 
@@ -12,9 +15,7 @@ class SessionsController < ApplicationController
 		else
 			flash[:alert] = "Invalid Email or Password"
 			render :new
-		end
-
-				
+		end	
 	end
 	
 	def destroy
